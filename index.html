@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffdde1;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        #container {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            position: relative;
+            width: 350px;
+        }
+
+        h1 {
+            color: #d63384;
+            font-size: 1.8rem;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            position: relative;
+            height: 60px;
+        }
+
+        button {
+            padding: 10px 25px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        #yesBtn {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #noBtn {
+            background-color: #f44336;
+            color: white;
+            position: absolute;
+            left: 180px;
+        }
+
+        .gif-container img {
+            width: 150px;
+            border-radius: 10px;
+        }
+
+        #success-message {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <div id="question-section">
+            <div class="gif-container">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueW9ueW9ueW9ueW9ueW9ueW9ueW9ueW9ueW9ueW9ueW9ueSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Cute Bear">
+            </div>
+            <h1>Will you be my Valentine? 💖</h1>
+            <div class="buttons">
+                <button id="yesBtn" onclick="celebrate()">Yes</button>
+                <button id="noBtn" onmouseover="moveButton()">No</button>
+            </div>
+        </div>
+
+        <div id="success-message">
+            <img src="https://i.pinimg.com/originals/ac/65/67/ac65677c7a2fe6af77b7f59b8041340f.gif">
+            <h1>Knew you would say yes! 🎉</h1>
+            <p>You just made me the happiest person! ❤️</p>
+        </div>
+    </div>
+
+    <script>
+        function moveButton() {
+            const noBtn = document.getElementById('noBtn');
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+            noBtn.style.position = 'fixed';
+        }
+
+        function celebrate() {
+            document.getElementById('question-section').style.display = 'none';
+            document.getElementById('success-message').style.display = 'block';
+            confetti();
+        }
+
+        // Basic confetti effect
+        function confetti() {
+            for(let i=0; i<50; i++) {
+                const confetto = document.createElement('div');
+                confetto.innerText = "🌸";
+                confetto.style.position = 'fixed';
+                confetto.style.left = Math.random() * 100 + 'vw';
+                confetto.style.top = '-10px';
+                confetto.style.fontSize = Math.random() * 20 + 10 + 'px';
+                confetto.style.zIndex = 1000;
+                document.body.appendChild(confetto);
+
+                let top = -10;
+                const interval = setInterval(() => {
+                    top += 5;
+                    confetto.style.top = top + 'px';
+                    if (top > window.innerHeight) {
+                        confetto.remove();
+                        clearInterval(interval);
+                    }
+                }, 20);
+            }
+        }
+    </script>
+</body>
+</html>
